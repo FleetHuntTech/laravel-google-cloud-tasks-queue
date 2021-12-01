@@ -64,6 +64,8 @@ class CloudTasksQueue extends LaravelQueue implements QueueContract
 
         $task = $this->createTask();
         $task->setHttpRequest($httpRequest);
+        
+        $task->setDispatchDeadline(30*60); // Set to Max. TODO: Convert to config based.
 
         $token = new OidcToken;
         $token->setServiceAccountEmail($this->config['service_account_email']);
