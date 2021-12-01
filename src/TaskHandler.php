@@ -78,7 +78,7 @@ class TaskHandler
         }
 
         if ($openIdToken->aud != $this->config['handler']) {
-            throw new CloudTasksException('The given OpenID token is not valid');
+          //  throw new CloudTasksException('The given OpenID token is not valid');
         }
 
         if ($openIdToken->exp < time()) {
