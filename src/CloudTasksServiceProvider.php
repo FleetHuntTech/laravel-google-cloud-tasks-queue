@@ -32,6 +32,6 @@ class CloudTasksServiceProvider extends LaravelServiceProvider
 
     private function registerRoutes(Router $router)
     {
-        $router->post('handle-task', [TaskHandler::class, 'handle']);
+       // $router->post('handle-task', [TaskHandler::class, 'handle']);
     }
 }
