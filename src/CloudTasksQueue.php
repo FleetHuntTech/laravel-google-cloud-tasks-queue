@@ -7,6 +7,7 @@ use Google\Cloud\Tasks\V2\HttpMethod;
 use Google\Cloud\Tasks\V2\HttpRequest;
 use Google\Cloud\Tasks\V2\OidcToken;
 use Google\Cloud\Tasks\V2\Task;
+use Google\Protobuf\Duration;
 use Google\Protobuf\Timestamp;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use Illuminate\Queue\Queue as LaravelQueue;
@@ -65,7 +66,11 @@ class CloudTasksQueue extends LaravelQueue implements QueueContract
         $task = $this->createTask();
         $task->setHttpRequest($httpRequest);
         
-        $task->setDispatchDeadline(30*60); // Set to Max. TODO: Convert to config based.
+          $duration = new Duration();
+        $duration->setSeconds(30*60);
+
+        $task->setDispatchDeadline($duration);
+         // Set to Max. TODO: Convert to config based.
 
         $token = new OidcToken;
         $token->setServiceAccountEmail($this->config['service_account_email']);
